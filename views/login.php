@@ -3,6 +3,7 @@ include './config/db.php';
 
 session_start();
 
+$success = $_SESSION['success'] ?? '';
 
 ?>
 <!DOCTYPE html>
@@ -70,13 +71,25 @@ session_start();
                 </div>
             <?php endif; ?>
 
-            <form action="login_process.php" method="POST" novalidate>
+            <!-- Success Message -->
+            <?php if (!empty($success)): ?>
+
+                <div class="mb-5 rounded-md border border-green-300 bg-green-50 p-4 text-sm text-green-700">
+
+                    <?= htmlspecialchars($success) ?>
+
+                </div>
+
+            <?php endif; ?>
+
+            <form action="../controller/loginController.php" method="POST" novalidate>
 
                 <div class="mb-4.5">
                     <label for="email" class="block text-[13px] font-semibold text-ink mb-1.5">Email address</label>
                     <input
                         type="email"
                         id="email"
+                        name="email"
                         placeholder="you@example.com"
                         required
                         class="w-full px-3 py-2.5 text-[15px] font-sans border border-rule rounded bg-paper text-ink focus:outline-none focus:border-brass">
