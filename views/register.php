@@ -121,7 +121,7 @@ unset($_SESSION['old']);
 
             <?php endif; ?>
 
-            <form action="../controller/example.php" method="POST">
+            <form action="../controller/registerController.php" method="POST">
 
                 <div class="mb-4">
                     <label for="name" class="block text-[13px] font-semibold text-ink mb-1.5">
