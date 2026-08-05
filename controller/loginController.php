@@ -76,7 +76,7 @@ $_SESSION['success'] = "Login successful!";
 
 unset($_SESSION['old']);
 
-header("Location: ../views/dashboard.php");
+header("Location: ../views/dasboard/adminDashboard.php");
 exit;
 
 mysqli_stmt_close($stmt);
