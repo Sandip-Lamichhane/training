@@ -1,3 +1,16 @@
+<?php
+
+session_start();
+
+require_once __DIR__ . '/../../middleware/authMiddlware.php';
+
+?>
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -198,12 +211,14 @@
                             </div>
 
                             <div class="border-t border-rule py-1.5">
-                                <a href="logout.php" class="flex items-center gap-3 px-4 py-2.5 text-sm text-err hover:bg-errlt transition-colors">
-                                    <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" />
-                                    </svg>
-                                    Log out
-                                </a>
+                                <form action="../../controller/logoutController.php">
+                                    <button class="flex items-center gap-3 px-4 py-2.5 text-sm text-err hover:bg-errlt transition-colors">
+                                        <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" />
+                                        </svg>
+                                        Log out
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>

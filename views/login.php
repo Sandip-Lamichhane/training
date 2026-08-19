@@ -1,11 +1,17 @@
 <?php
-include (__DIR__ .'/../config/db.php');
 
 session_start();
 
+include(__DIR__ . '/../config/db.php');
+
 $success = $_SESSION['success'] ?? '';
+$errors = $_SESSION['errors'] ?? [];
+
+unset($_SESSION['success']);
+unset($_SESSION['errors']);
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,19 +72,27 @@ $success = $_SESSION['success'] ?? '';
             <p class="text-inksoft text-sm mb-7">Log in with the email you registered with.</p>
 
             <?php if (!empty($errors)): ?>
-                <div class="rounded-md px-4 py-2.5 text-sm mb-5 bg-red-50 text-err border border-red-200">
-                    <?php echo htmlspecialchars(implode(' ', $errors)); ?>
+
+                <div class="rounded-md mb-4 p-4 text-sm mb-5 bg-red-50 text-red-700 border border-red-200">
+
+                    <?php foreach ($errors as $error): ?>
+
+                        <p><?= htmlspecialchars($error) ?></p>
+
+                    <?php endforeach; ?>
+
                 </div>
+
             <?php endif; ?>
 
-            <!-- Success Message -->
-            <?php if (!empty($success)): ?>
+
+            <?php if (isset($success)): ?>
 
                 <div class="mb-5 rounded-md border border-green-300 bg-green-50 p-4 text-sm text-green-700">
-
                     <?= htmlspecialchars($success) ?>
-
                 </div>
+
+                <?php unset($success); ?>
 
             <?php endif; ?>
 

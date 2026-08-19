@@ -4,9 +4,9 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_start();
 
-include ('../config/db.php');
+include('../config/db.php');
 
-if($_SERVER['REQUEST_METHOD'] != 'POST'){
+if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     header('Location: ../views/login.php');
 }
 
@@ -22,13 +22,15 @@ $_SESSION['old'] = [
 ];
 
 //validation
-if(empty($email) || empty($password)){
+if (empty($email) || empty($password)) {
     $errors = 'All fields are required';
 }
 
 //validate email
-if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-    $errors = 'Please enter a valid email address';
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    // $errors = [
+    //     'Please enter a valid email address'
+    // ];
 }
 
 if (!empty($errors)) {
@@ -72,7 +74,7 @@ $_SESSION['user'] = [
     'email' => $user['email']
 ];
 
-$_SESSION['success'] = "Login successful!";
+// $_SESSION['success'] = "Login successful!";
 
 unset($_SESSION['old']);
 
