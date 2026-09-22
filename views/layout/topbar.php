@@ -22,14 +22,14 @@ $user = $user ?? [
                 <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
         </button>
-        <div class="relative w-full max-w-sm hidden sm:block">
+        <form action="/workshop/views/student/index.php" method="GET" class="relative w-full max-w-sm hidden sm:block">
             <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-inksoft" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="11" cy="11" r="7" />
                 <path stroke-linecap="round" d="M21 21l-3.5-3.5" />
             </svg>
-            <input type="text" placeholder="Search students, courses, IDs…"
-                class="w-full pl-9 pr-3 py-2.5 text-sm border border-rule rounded-md bg-white focus:outline-none focus:border-brass">
-        </div>
+            <input type="text" name="search" placeholder="Search students (Binary / Linear Search)…"
+                class="w-full pl-9 pr-3 py-2 text-sm border border-rule rounded-md bg-white focus:outline-none focus:border-brass">
+        </form>
     </div>
 
     <div class="flex items-center gap-2">

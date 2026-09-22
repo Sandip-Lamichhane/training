@@ -1,17 +1,25 @@
 <?php
 
 require_once __DIR__ . '/../../middleware/authMiddlware.php';
+require_once __DIR__ . '/../../config/db.php';
 
 // Tell the sidebar which link is active and give the navbar the
 // logged-in user's info (swap this for your real session/auth data).
 $currentPage = 'dashboard';
 $pageTitle   = 'Dashboard';
 $user = [
-    'name'   => $_SESSION['user_name']  ?? 'Maya Reynolds',
-    'role'   => $_SESSION['user_role']  ?? 'Registrar Admin',
-    'email'  => $_SESSION['user_email'] ?? 'maya.reynolds@registrar.edu',
-    'avatar' => $_SESSION['user_avatar'] ?? 'https://i.pravatar.cc/64?img=47',
+    'name'   => $_SESSION['user']['name']  ?? $_SESSION['user_name']  ?? 'Registrar Admin',
+    'role'   => $_SESSION['user_role']     ?? 'Registrar Admin',
+    'email'  => $_SESSION['user']['email'] ?? $_SESSION['user_email'] ?? 'admin@registrar.edu',
+    'avatar' => $_SESSION['user_avatar']   ?? 'https://i.pravatar.cc/64?img=47',
 ];
+
+// Query total registered students
+$totalStudents = 0;
+$countResult = $conn->query("SELECT COUNT(*) AS total FROM students");
+if ($countResult) {
+    $totalStudents = (int)($countResult->fetch_assoc()['total'] ?? 0);
+}
 
 include __DIR__ . '/../layout/header.php';   // <head>, opens <body> + flex wrapper
 include __DIR__ . '/../layout/sidebar.php';  // left nav
@@ -38,12 +46,12 @@ include __DIR__ . '/../layout/sidebar.php';  // left nav
                         </svg>
                         Export report
                     </button>
-                    <button class="flex items-center gap-2 text-sm font-semibold px-4 py-2.5 rounded-md bg-ink text-paper hover:bg-brassdk transition-colors">
+                    <a href="/workshop/views/student/addStudent.php" class="flex items-center gap-2 text-sm font-semibold px-4 py-2.5 rounded-md bg-ink text-paper hover:bg-brassdk transition-colors">
                         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" d="M12 5v14M5 12h14" />
                         </svg>
                         Add student
-                    </button>
+                    </a>
                 </div>
             </div>
 
@@ -59,12 +67,12 @@ include __DIR__ . '/../layout/sidebar.php';  // left nav
                             </svg>
                         </div>
                     </div>
-                    <div class="font-mono font-semibold text-3xl mt-3">3,482</div>
+                    <div class="font-mono font-semibold text-3xl mt-3"><?php echo number_format($totalStudents); ?></div>
                     <div class="flex items-center gap-1 mt-2 text-xs font-medium text-ok">
                         <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7" />
                         </svg>
-                        4.2% vs last term
+                        Live from database
                     </div>
                 </div>
 
@@ -127,4 +135,4 @@ include __DIR__ . '/../layout/sidebar.php';  // left nav
         </main>
     </div>
 
-<?php include __DIR__ . '/includes/footer.php'; ?>
+<?php include __DIR__ . '/../layout/footer.php'; ?>
